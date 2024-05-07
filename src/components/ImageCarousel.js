@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 import fetchImages from "../api/fetchImages";
 import CarouselButton from "./CarouselButton";
 import ImageScan from "./ImageScan";
@@ -10,15 +10,22 @@ import {
   nextImage,
   previousImage,
 } from "../store/scansSlice";
+import ToggleButton from "./ToggleSwitch";
 
 export default function ImageCarousel() {
   const dispatch = useDispatch();
+  const [filterIsToggled, setFilterIsToggled] = useState(false);
 
   const images = useSelector((state) => state.scansReducer.images);
   const imagesError = useSelector((state) => state.scansReducer.error);
   const currentImageIndex = useSelector((state) => state.scansReducer.currentImageIndex);
 
   const currentImage = images[currentImageIndex];
+
+  const handleToggle = (value) => {
+    console.log("handle toggle -> ", value);
+    setFilterIsToggled(value);
+  }
 
   const handleClick = (type) => {
     if (type === "next") {
@@ -28,9 +35,30 @@ export default function ImageCarousel() {
     }
   };
 
+  // TODO: refactor this, doesnt look good
+  useEffect(() => {
+    if (filterIsToggled) {
+      const filteredImages = images.filter((image) => {
+        return image.detectionsList.length > 0;
+      });
+      dispatch(setImages(filteredImages));
+    } else {
+      fetchImages(
+        (images) => {
+          dispatch(setImages(images));
+        },
+        (error) => {
+          dispatch(setError(error));
+        }
+      );
+    }
+  }, [filterIsToggled]);
+
+  // TODO: fix re-renders
   useEffect(() => {
     fetchImages(
       (images) => {
+        console.log(images);
         dispatch(setImages(images));
       },
       (error) => {
@@ -40,25 +68,17 @@ export default function ImageCarousel() {
   }, []);
 
   return (
-    <div
-      // TODO: Styles can be defined in a seperate file using mui useStyle
-      style={{
-        display: "flex",
-        flexDirection: "row",
-        justifyContent: "center",
-        alignItems: "center",
-        alignContent: "center",
-        width: "85%",
-        height: "100%",
-      }}
+    <div className="flex flex-row justify-center items-center content-center w-85 h-full"
     >
+      <ToggleButton value={filterIsToggled} onToggle={handleToggle}>Only show images with detected gas</ToggleButton>
+      
       {imagesError && <div> {imagesError} </div>}
       {!imagesError && (
         <>
           <CarouselButton
             type="previous"
             onClick={handleClick}
-            isEnabled={currentImageIndex - 1 >= 0}
+            isEnabled={currentImageIndex - 1 > 0}
           >
             Previous image
           </CarouselButton>
