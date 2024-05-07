@@ -13,17 +13,13 @@ export default function ImageCarousel() {
       setCurrentImageIndex((prevIndex) => {
         if (prevIndex + 1 < images.length) {
           return prevIndex + 1;
-        } else {
-          return 0;
-        }
+        } 
       });
     } else {
       setCurrentImageIndex((prevIndex) => {
         if (prevIndex - 1 >= 0) {
           return prevIndex - 1;
-        } else {
-          return images.length - 1;
-        }
+        } 
       });
     }
   };
