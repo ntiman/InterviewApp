@@ -1,5 +1,5 @@
 import "./App.css";
-import NavigationBar from "./pages/NavigationBar";
+import NavigationBar from "./components/NavigationBar";
 import ImageCarousel from "./components/ImageCarousel";
 
 function App() {

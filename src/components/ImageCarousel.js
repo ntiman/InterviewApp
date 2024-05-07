@@ -2,11 +2,15 @@ import { useState, useEffect } from "react";
 import fetchImages from "../api/fetchImages";
 import CarouselButton from "./CarouselButton";
 import ImageScan from "./ImageScan";
+import { useSelector, useDispatch } from "react-redux";
+import {setImages, setError, setCurrentImageIndex} from "../store/scansSlice"
 
 export default function ImageCarousel() {
-  const [images, setImages] = useState([]);
-  const [currentImageIndex, setCurrentImageIndex] = useState(0);
-  const [fetchError, setFetchError] = useState("");
+  const dispatch = useDispatch();
+
+  const images = useSelector((state) => state.scansReducer.images);
+  const imagesError = useSelector((state) => state.scansReducer.error);
+  const currentImageIndex = useSelector((state) => state.scansReducer.currentImageIndex);
 
   const handleClick = (type) => {
     if (type === "next") {
@@ -27,10 +31,10 @@ export default function ImageCarousel() {
   useEffect(() => {
     fetchImages(
       (images) => {
-        setImages(images);
+        dispatch(setImages(images));
       },
       (error) => {
-        setFetchError(error);
+       dispatch(setError(error));
       }
     );
   }, []);
@@ -48,8 +52,8 @@ export default function ImageCarousel() {
         height: "100%",
       }}
     >
-      {fetchError && <div> {fetchError} </div>}
-      {!fetchError && (
+      {imagesError && <div> {imagesError} </div>}
+      {!imagesError && (
         <>
           <CarouselButton
             type="previous"
