@@ -1,4 +1,5 @@
 import React, { useEffect, useRef } from "react";
+import PropTypes from "prop-types";
 
 const ImageScan = ({ detectionImage }) => {
   const canvasRef = useRef(null);
@@ -40,3 +41,7 @@ const ImageScan = ({ detectionImage }) => {
 };
 
 export default ImageScan;
+
+ImageScan.propTypes = {
+  detectionImage: PropTypes.object.isRequired,
+};
