@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import fetchImages from "../api/fetchImages";
-import CarouselButton from "../components/CarouselButton";
-import ImageScan from "../components/ImageScan";
+import CarouselButton from "./CarouselButton";
+import ImageScan from "./ImageScan";
 
 export default function ImageCarousel() {
   const [images, setImages] = useState([]);

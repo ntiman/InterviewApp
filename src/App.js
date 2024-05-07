@@ -1,6 +1,6 @@
 import "./App.css";
 import NavigationBar from "./pages/NavigationBar";
-import ImageCarousel from "./pages/ImageCarousel";
+import ImageCarousel from "./components/ImageCarousel";
 
 function App() {
   return (
