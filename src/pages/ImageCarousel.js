@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import fetchImages from "../api/fetchImages";
 import CarouselButton from "../components/CarouselButton";
+import ImageScan from "../components/ImageScan";
 
 export default function ImageCarousel() {
   const [images, setImages] = useState([]);
@@ -73,11 +74,12 @@ export default function ImageCarousel() {
               <div> Index: {currentImageIndex} </div>
             </div>
             {images.length > 0 && (
-              <img src={images[currentImageIndex].jpg} alt="Scan result" />
+              <ImageScan detectionImage={images[currentImageIndex]} />
             )}
             {images[currentImageIndex]?.createdOn && (
               <div> Scan Timestamp: {images[currentImageIndex].createdOn} </div>
             )}
+
             {/* TODO: Finish adding image metadata!  */}
             <div> Image Metadata: INCOMPLETE </div>
             <div> Number of Detections: INCOMPLETE </div>
