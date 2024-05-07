@@ -1,10 +1,9 @@
 import axios from "axios";
-
-const baseURL = "http://localhost:7071";
+import config from '../config/config';
 
 const fetchImages = async (onSuccess, onError) => {
   try {
-    const response = await axios.get(`${baseURL}/events`);
+    const response = await axios.get(`${config.baseUrl}/events`);
     onSuccess(response.data.scanResults);
   } catch (error) {
     if (onError) {
