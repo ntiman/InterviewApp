@@ -15,12 +15,19 @@ export const scansSlice = createSlice({
     setError: (state, action) => {
       state.error = action.payload;
     },
-    setCurrentImageIndex: (state, action) => {
-      state.currentImageIndex = action.payload;
+    nextImage: (state) => {
+      if (state.currentImageIndex < state.images.length - 1) {
+        state.currentImageIndex += 1;
+      }
     },
+    previousImage: (state) => {
+      if (state.currentImageIndex > 0) {
+        state.currentImageIndex -= 1;
+      }
+    }
   },
 });
 
-export const { setImages, setError, setCurrentImageIndex } = scansSlice.actions;
+export const { setImages, setError, nextImage, previousImage } = scansSlice.actions;
 
 export default scansSlice.reducer;

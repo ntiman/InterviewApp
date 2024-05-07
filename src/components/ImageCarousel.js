@@ -3,7 +3,7 @@ import fetchImages from "../api/fetchImages";
 import CarouselButton from "./CarouselButton";
 import ImageScan from "./ImageScan";
 import { useSelector, useDispatch } from "react-redux";
-import {setImages, setError, setCurrentImageIndex} from "../store/scansSlice"
+import {setImages, setError, nextImage, previousImage} from "../store/scansSlice"
 
 export default function ImageCarousel() {
   const dispatch = useDispatch();
@@ -14,17 +14,9 @@ export default function ImageCarousel() {
 
   const handleClick = (type) => {
     if (type === "next") {
-      setCurrentImageIndex((prevIndex) => {
-        if (prevIndex + 1 < images.length) {
-          return prevIndex + 1;
-        } 
-      });
+      dispatch(nextImage());
     } else {
-      setCurrentImageIndex((prevIndex) => {
-        if (prevIndex - 1 >= 0) {
-          return prevIndex - 1;
-        } 
-      });
+      dispatch(previousImage());
     }
   };
 
