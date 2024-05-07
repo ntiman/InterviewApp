@@ -2,8 +2,14 @@ import { useState, useEffect } from "react";
 import fetchImages from "../api/fetchImages";
 import CarouselButton from "./CarouselButton";
 import ImageScan from "./ImageScan";
+import ScanMetadata from "./ScanMetadata";
 import { useSelector, useDispatch } from "react-redux";
-import {setImages, setError, nextImage, previousImage} from "../store/scansSlice"
+import {
+  setImages,
+  setError,
+  nextImage,
+  previousImage,
+} from "../store/scansSlice";
 
 export default function ImageCarousel() {
   const dispatch = useDispatch();
@@ -11,6 +17,8 @@ export default function ImageCarousel() {
   const images = useSelector((state) => state.scansReducer.images);
   const imagesError = useSelector((state) => state.scansReducer.error);
   const currentImageIndex = useSelector((state) => state.scansReducer.currentImageIndex);
+
+  const currentImage = images[currentImageIndex];
 
   const handleClick = (type) => {
     if (type === "next") {
@@ -26,7 +34,7 @@ export default function ImageCarousel() {
         dispatch(setImages(images));
       },
       (error) => {
-       dispatch(setError(error));
+        dispatch(setError(error));
       }
     );
   }, []);
@@ -66,15 +74,13 @@ export default function ImageCarousel() {
               <div> Index: {currentImageIndex} </div>
             </div>
             {images.length > 0 && (
-              <ImageScan detectionImage={images[currentImageIndex]} />
+              <ImageScan detectionImage={currentImage} />
             )}
-            {images[currentImageIndex]?.createdOn && (
-              <div> Scan Timestamp: {images[currentImageIndex].createdOn} </div>
+            {currentImage?.createdOn && (
+              <div> Scan Timestamp: {currentImage.createdOn} </div>
             )}
 
-            {/* TODO: Finish adding image metadata!  */}
-            <div> Image Metadata: INCOMPLETE </div>
-            <div> Number of Detections: INCOMPLETE </div>
+            <ScanMetadata scan={currentImage} />
           </div>
           <CarouselButton
             type="next"
