@@ -14,6 +14,7 @@ import ToggleButton from "./ToggleSwitch";
 
 export default function ImageCarousel() {
   const dispatch = useDispatch();
+  
   const [filterIsToggled, setFilterIsToggled] = useState(false);
 
   const images = useSelector((state) => state.scansReducer.images);
@@ -23,7 +24,6 @@ export default function ImageCarousel() {
   const currentImage = images[currentImageIndex];
 
   const handleToggle = (value) => {
-    console.log("handle toggle -> ", value);
     setFilterIsToggled(value);
   }
 
@@ -35,7 +35,7 @@ export default function ImageCarousel() {
     }
   };
 
-  // TODO: refactor this, doesnt look good
+  // TODO: refactor this, dont want to fetch each time the filter is toggled
   useEffect(() => {
     if (filterIsToggled) {
       const filteredImages = images.filter((image) => {
@@ -53,19 +53,6 @@ export default function ImageCarousel() {
       );
     }
   }, [filterIsToggled]);
-
-  // TODO: fix re-renders
-  useEffect(() => {
-    fetchImages(
-      (images) => {
-        console.log(images);
-        dispatch(setImages(images));
-      },
-      (error) => {
-        dispatch(setError(error));
-      }
-    );
-  }, []);
 
   return (
     <div className="flex flex-row justify-center items-center content-center w-85 h-full"
