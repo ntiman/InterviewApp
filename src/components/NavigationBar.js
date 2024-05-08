@@ -1,4 +1,5 @@
 import KuvaLogo from "../media/KuvaLogo.png";
+import { Link } from "react-router-dom";
 
 function NavigationBar() {
   return (
@@ -10,7 +11,11 @@ function NavigationBar() {
       }}
     >
       <img style={{ width: "95%" }} src={KuvaLogo} />
-      <span style={{ marginTop: "30%", color: "white" }}> Home </span>
+      <div>
+      <Link to="/">Home</Link>
+      <Link to="/about">About</Link>
+      <Link to="/contact">Contact</Link>
+      </div>
     </div>
   );
 }

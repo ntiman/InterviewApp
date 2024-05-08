@@ -1,6 +1,9 @@
 import "./App.css";
+import Home from "./pages/Home";
+import Accounts from "./pages/Accounts";
+import Settings from "./pages/Settings";
+import { Route, Routes, BrowserRouter as Router } from "react-router-dom";
 import NavigationBar from "./components/NavigationBar";
-import ImageCarousel from "./components/ImageCarousel";
 
 function App() {
   return (
@@ -12,8 +15,16 @@ function App() {
         flexDirection: "row",
       }}
     >
+      <Router>
       <NavigationBar />
-      <ImageCarousel />
+
+        <Routes>
+          <Route index path="/" element={<Home />} />
+          <Route path="/accounts" element={<Accounts />} />
+          <Route path="/setting" element={<Settings />} />
+        </Routes>
+      </Router>
+      
     </div>
   );
 }
