@@ -7,21 +7,13 @@ import NavigationBar from "./components/NavigationBar";
 
 function App() {
   return (
-    <div
-      className="App"
-      style={{
-        height: "100vh",
-        display: "flex",
-        flexDirection: "row",
-      }}
-    >
+    <div>
       <Router>
       <NavigationBar />
-
         <Routes>
           <Route index path="/" element={<Home />} />
           <Route path="/accounts" element={<Accounts />} />
-          <Route path="/setting" element={<Settings />} />
+          <Route path="/settings" element={<Settings />} />
         </Routes>
       </Router>
       
