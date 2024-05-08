@@ -9,6 +9,7 @@ import {
   setError,
   nextImage,
   previousImage,
+  resetCurrentIndex
 } from "../store/slices/scansSlice";
 import ToggleButton from "./ToggleSwitch";
 
@@ -38,6 +39,7 @@ export default function ImageCarousel() {
 
   const handleToggle = (value) => {
     setFilterIsToggled(value);
+    dispatch(resetCurrentIndex());
   };
 
   const handleClick = (type) => {
@@ -68,7 +70,7 @@ export default function ImageCarousel() {
   }, [filterIsToggled]);
 
   return (
-    <section className="flex flex-row justify-center items-center content-center h-full ">
+    <section className="flex flex-row justify-center items-center content-center h-full">
       {imagesError && <div> {imagesError} </div>}
       {!imagesError && (
         <section className="flex flex-col gap-y-4 justify-center align-middle ">

@@ -35,9 +35,8 @@ export default function ScanMetadata({ scan }) {
         <p>Number of Detections: {detectionsList?.length}</p>
         {detectionsList?.map((detection, index) => {
           return (
-            <section>
+            <section key={detection.uuid}>
               <small>Detection {index + 1}</small>
-            
             <table className="mb-4 text-sm text-left text-gray-500 ">
               <thead className="text-xs  uppercase bg-kuvaGray text-gray-200">
                 <tr>
