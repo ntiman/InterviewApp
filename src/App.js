@@ -7,17 +7,18 @@ import NavigationBar from "./components/NavigationBar";
 
 function App() {
   return (
-    <div>
+    <section className="flex flex-col mx-auto bg-kuvaBackground text-white overflow-y-scroll min-h-screen">
       <Router>
       <NavigationBar />
+      <section className="px-4  pt-8">
         <Routes>
           <Route index path="/" element={<Home />} />
           <Route path="/accounts" element={<Accounts />} />
           <Route path="/settings" element={<Settings />} />
         </Routes>
+        </section>
       </Router>
-      
-    </div>
+    </section>
   );
 }
 

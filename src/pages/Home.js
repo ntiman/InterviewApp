@@ -18,8 +18,8 @@ export default function Home() {
     );
   }, []);
   return (
-    <div>
+    <section className="flex bg-red w-full justify-center align-middle h-full">
       <ImageCarousel />
-    </div>
+    </section>
   );
 }

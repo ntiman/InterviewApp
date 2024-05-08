@@ -30,8 +30,8 @@ const ImageScan = ({ detectionImage }) => {
           ctx.lineTo(coordinates[4], coordinates[5]);
           ctx.lineTo(coordinates[6], coordinates[7]);
           ctx.closePath();
-          ctx.strokeStyle = "#e05025"; 
-          ctx.lineWidth = 2; 
+          ctx.strokeStyle = "red"; 
+          ctx.lineWidth = 3; 
           ctx.stroke();
         });
       } 

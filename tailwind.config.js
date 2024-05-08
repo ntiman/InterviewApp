@@ -6,6 +6,7 @@ module.exports = {
      colors: {
       accent: '#E05025',
       kuvaGray: '#222222',
+      kuvaBackground: '#353535',
      }
     },
   },

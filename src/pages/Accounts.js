@@ -1,7 +1,10 @@
 import React from 'react'
+import H1  from '../components/H1'
 
 export default function Accounts() {
   return (
-    <div>Accounts</div>
+    <section>
+      <H1>Accounts</H1>
+    </section>
   )
 }
