@@ -5,6 +5,7 @@ module.exports = {
     extend: {
      colors: {
       accent: '#E05025',
+      kuvaGray: '#222222',
      }
     },
   },

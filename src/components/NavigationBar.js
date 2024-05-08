@@ -28,7 +28,7 @@ export default function NavigationBar() {
     // <Link to="/settings">Contact</Link>
     //   </div>
     // </div>
-    <header className="flex items-center justify-between border-b border-white/10 bg-[#222222] h-20 px-3 sm:px-9 ">
+    <header className="flex flex-col md:flex-row gap-y-4 pt-6 md:pt-0 md:gap-y-0 items-center justify-between md:h-20 h-36 px-3 sm:px-9 bg-kuvaGray">
      <Link to="/"><img className="h-8" src={KuvaLogo} alt="Kuva Systems Logo"/></Link>
     <nav className="h-full ">
      <ul className="flex gap-x-6 h-full text-sm">
