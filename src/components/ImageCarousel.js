@@ -9,7 +9,7 @@ import {
   setError,
   nextImage,
   previousImage,
-} from "../store/scansSlice";
+} from "../store/slices/scansSlice";
 import ToggleButton from "./ToggleSwitch";
 
 export default function ImageCarousel() {
