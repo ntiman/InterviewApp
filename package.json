@@ -25,8 +25,9 @@
     "web-vitals": "^3.3.1"
   },
   "scripts": {
-    "jsonserver": "json-server --watch ./jsonServer/cameraAPI.json --port 7071 --nc false --routes ./jsonServer/routes.json",
-    "start": "concurrently \"npm run jsonserver\" \"react-scripts start\"",
+    "jsonserver-camera": "json-server --watch ./jsonServer/cameraAPI.json --port 7071 --nc false --routes ./jsonServer/routesCamera.json",
+    "jsonserver-org": "json-server --watch ./jsonServer/orgAPI.json --port 7074 --nc false --routes ./jsonServer/routesOrg.json",
+    "start": "concurrently \"npm run jsonserver-camera\" \"npm run jsonserver-org\" \"react-scripts start\"",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"

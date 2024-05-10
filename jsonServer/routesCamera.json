@@ -1,6 +1,5 @@
 {
-  "/v1/*": "/$1",
   "/alarms/*": "/alarms",
   "/events/*": "/events",
-  "/users/*": "/users/"
+  "/camera/*": "/camera"
 }
