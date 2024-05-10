@@ -4,6 +4,9 @@ import PropTypes from "prop-types";
 const ImageScan = ({ detectionImage }) => {
   const canvasRef = useRef(null);
   const image = new Image();
+
+  const padding = 7;
+  
   image.alt = "Scan result";
 
   useEffect(() => {
@@ -24,17 +27,29 @@ const ImageScan = ({ detectionImage }) => {
         detectionList.forEach((detection) => {
           const coordinates = detection.roicoordsList;
 
+          const paddedCoordinates = [
+            coordinates[0] - padding, 
+            coordinates[1] - padding, 
+            coordinates[2] + padding, 
+            coordinates[3] - padding, 
+            coordinates[4] + padding, 
+            coordinates[5] + padding, 
+            coordinates[6] - padding, 
+            coordinates[7] + padding  
+          ];
+
           ctx.beginPath();
-          ctx.moveTo(coordinates[0], coordinates[1]);
-          ctx.lineTo(coordinates[2], coordinates[3]);
-          ctx.lineTo(coordinates[4], coordinates[5]);
-          ctx.lineTo(coordinates[6], coordinates[7]);
+          ctx.moveTo(paddedCoordinates[0], paddedCoordinates[1]);
+          ctx.lineTo(paddedCoordinates[2], paddedCoordinates[3]);
+          ctx.lineTo(paddedCoordinates[4], paddedCoordinates[5]);
+          ctx.lineTo(paddedCoordinates[6], paddedCoordinates[7]);
           ctx.closePath();
           ctx.strokeStyle = "red"; 
           ctx.lineWidth = 3; 
+          ctx.fill();
           ctx.stroke();
         });
-      } 
+      }
     };
   }, [detectionImage]);
   return <canvas ref={canvasRef}></canvas>;
