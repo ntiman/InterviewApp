@@ -46,7 +46,6 @@ const ImageScan = ({ detectionImage }) => {
           ctx.closePath();
           ctx.strokeStyle = "red"; 
           ctx.lineWidth = 3; 
-          ctx.fill();
           ctx.stroke();
         });
       }
