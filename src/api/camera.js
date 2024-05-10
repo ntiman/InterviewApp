@@ -1,10 +1,9 @@
 import axios from "axios";
-import config from '../config/config';
+import { API_ROUTES }  from '../config/config';
 
 export const fetchEvents = async (onSuccess, onError) => {
   try {
-    const response = await axios.get(`${config.baseUrl}/events`);
-    // console.log(response.data.scanResults)
+    const response = await axios.get(`${API_ROUTES.CAMERA}/events`);
     onSuccess(response.data.scanResults);
   } catch (error) {
     if (onError) {
@@ -15,13 +14,15 @@ export const fetchEvents = async (onSuccess, onError) => {
 
 export const fetchAlarms = async (onSuccess, onError) => {
   try {
-    const response = await axios.get(`${config.baseUrl}/camera`);
+    const response = await axios.get(`${API_ROUTES.CAMERA}/camera`);
     onSuccess(response.data.scanResults);
   } catch (error) {
     if (onError) {
       console.log(error);
-      onError("An error occurred while fetching images");
+      onError("An error occurred while fetching alarms");
     }
   }
 };
+
+
 

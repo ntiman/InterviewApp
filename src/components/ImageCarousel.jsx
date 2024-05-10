@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { fetchEvents } from "../api/api";
+import { fetchEvents } from "../api/camera";
 import CarouselButton from "./CarouselButton";
 import ImageScan from "./ImageScan";
 import ScanMetadata from "./ScanMetadata";

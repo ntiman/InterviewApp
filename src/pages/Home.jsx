@@ -1,15 +1,15 @@
 import React, { useEffect } from "react";
 import ImageCarousel from "../components/ImageCarousel";
-import { fetchAlarms, fetchEvents } from "../api/api";
+import { fetchAlarms, fetchEvents } from "../api/camera";
 import { useDispatch } from "react-redux";
 import { setImages, setError } from "../store/slices/eventsSlice";
 import SelectCamera from "../components/SelectCamera";
+import { fetchOrgs } from "../api/org";
 
 export default function Home() {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    console.log(fetchAlarms());
     fetchEvents(
       (images) => {
         dispatch(setImages(images));
