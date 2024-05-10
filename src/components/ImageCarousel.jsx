@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import fetchImages from "../api/fetchImages";
+import { fetchEvents } from "../api/api";
 import CarouselButton from "./CarouselButton";
 import ImageScan from "./ImageScan";
 import ScanMetadata from "./ScanMetadata";
@@ -10,7 +10,7 @@ import {
   nextImage,
   previousImage,
   resetCurrentIndex
-} from "../store/slices/scansSlice";
+} from "../store/slices/eventsSlice";
 import ToggleButton from "./ToggleSwitch";
 
 export default function ImageCarousel() {
@@ -58,7 +58,7 @@ export default function ImageCarousel() {
       });
       dispatch(setImages(filteredImages));
     } else {
-      fetchImages(
+      fetchEvents(
         (images) => {
           dispatch(setImages(images));
         },

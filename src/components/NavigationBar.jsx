@@ -14,20 +14,6 @@ export default function NavigationBar() {
   const activePathname = useLocation().pathname;
 
   return (
-    // <div
-    //   style={{
-    //     height: "100%",
-    //     width: "15%",
-    //     backgroundColor: "#222222",
-    //   }}
-    // >
-    //   <img style={{ width: "95%" }} src={KuvaLogo} alt="Kuva Systems Logo"/>
-    //   <div>
-    // <Link to="/">Home</Link>
-    // <Link to="/accounts">About</Link>
-    // <Link to="/settings">Contact</Link>
-    //   </div>
-    // </div>
     <header className="flex flex-col md:flex-row gap-y-4 pt-6 md:pt-0 md:gap-y-0 items-center justify-between md:h-20 h-36 px-3 sm:px-9 bg-kuvaGray">
      <Link to="/"><img className="h-8" src={KuvaLogo} alt="Kuva Systems Logo"/></Link>
     <nav className="h-full ">
@@ -45,7 +31,7 @@ export default function NavigationBar() {
           >
             <Link to={route.path}>{route.name}</Link>
             {activePathname === route.path && (
-              <motion.div layoutId="header-active-link" className="bg-accent h-0.5 w-full absolute bottom-6"></motion.div>
+              <motion.div layoutId="header-active-link" className="bg-primary h-0.5 w-full absolute bottom-6"></motion.div>
             )}
           </li>
         ))}
