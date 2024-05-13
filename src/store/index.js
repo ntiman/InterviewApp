@@ -1,8 +1,10 @@
 import { configureStore } from "@reduxjs/toolkit";
-import scansReducer from "./slices/eventsSlice";
+import eventsReducer from "./slices/eventsSlice";
+import camerasReducer from "./slices/camerasSlice";
 
 export const store = configureStore({
     reducer: {
-      scansReducer,
+      eventsReducer,
+      camerasReducer,
     }
   });

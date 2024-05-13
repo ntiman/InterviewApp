@@ -4,15 +4,15 @@ export const camerasSlice = createSlice({
   name: "camerasSlice",
   initialState: {
     cameras: [],
-    selectedCamera: "",
-    isError: false,
+    selectedCamera: null,
     error: "",
   },
   reducers: {
     setCameras: (state, action) => {
       state.cameras = action.payload;
+      state.selectedCamera = action.payload[0];
     },
-    setError: (state, action) => {
+    setCamerasLoadingError: (state, action) => {
       state.error = action.payload;
     },
     setSelectedCamera: (state, action) => {
@@ -22,11 +22,9 @@ export const camerasSlice = createSlice({
 });
 
 export const {
-  setImages,
-  setError,
-  nextImage,
-  previousImage,
-  resetCurrentIndex,
+  setCameras,
+  setCamerasLoadingError,
+  setSelectedCamera,
 } = camerasSlice.actions;
 
 export default camerasSlice.reducer;
