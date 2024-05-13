@@ -51,7 +51,7 @@ const ImageScan = ({ detectionImage }) => {
       }
     };
   }, [detectionImage]);
-  return <canvas ref={canvasRef}></canvas>;
+  return <canvas ref={canvasRef} className="w-full"></canvas>;
 };
 
 export default ImageScan;

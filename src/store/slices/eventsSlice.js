@@ -4,11 +4,15 @@ export const eventsSlice = createSlice({
   name: "eventsSlice",
   initialState: {
     images: [],
+    events: [],
     currentImageIndex: 0,
     isError: false,
     error: "",
   },
   reducers: {
+    setEvents: (state, action) => {
+      state.events = action.payload;
+    },
     setImages: (state, action) => {
       state.images = action.payload;
     },
@@ -27,10 +31,17 @@ export const eventsSlice = createSlice({
     },
     resetCurrentIndex: (state) => {
       state.currentImageIndex = 0;
-    }
+    },
   },
 });
 
-export const { setImages, setError, nextImage, previousImage, resetCurrentIndex } = eventsSlice.actions;
+export const {
+  setImages,
+  setEvents,
+  setError,
+  nextImage,
+  previousImage,
+  resetCurrentIndex,
+} = eventsSlice.actions;
 
 export default eventsSlice.reducer;

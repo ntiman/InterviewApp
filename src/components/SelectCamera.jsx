@@ -19,22 +19,23 @@ export default function SelectCamera() {
   );
 
   return (
+    
     <Select>
-      <SelectTrigger className="w-[180px]">
+      <SelectTrigger className="w-[280px]">
+      <Cctv/>
         <SelectValue placeholder={selectedCamera?.tags.name} />
       </SelectTrigger>
       <SelectContent>
         <SelectGroup>
-          <SelectLabel>Cameras</SelectLabel>
+          <SelectLabel>Available cameras</SelectLabel>
           {cameras.map((camera) => (
             <section key={camera.deviceId} className="flex flex-row">
-              <Cctv />
               <SelectItem value={camera.tags.name}>
                 {camera.tags.name}
                 {camera.connectionState ? (
-                  <b className="text-green-500">yes</b>
+                  <span className="text-green-500 text-xs ml-2">active</span>
                 ) : (
-                  <b className="text-red-600">no</b>
+                  <span className="text-white/50 text-xs ml-2">inactive</span>
                 )}
               </SelectItem>
             </section>
@@ -45,6 +46,3 @@ export default function SelectCamera() {
   );
 }
 
-SelectCamera.propTypes = {
-  // cameras: PropTypes.array,
-};

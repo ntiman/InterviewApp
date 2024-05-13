@@ -12,7 +12,9 @@ import {
   resetCurrentIndex,
 } from "../store/slices/eventsSlice";
 import ToggleButton from "./ToggleSwitch";
-import dateFormatter from "../lib/dateFormatter";
+import { fullDate } from "../lib/dateFormatter";
+import { Clock2, CircleAlert } from "lucide-react";
+import { Badge } from "./ui/badge";
 
 export default function ImageCarousel() {
   const dispatch = useDispatch();
@@ -26,12 +28,7 @@ export default function ImageCarousel() {
   );
 
   const currentImage = images[currentImageIndex];
-  const createdOn = dateFormatter(currentImage?.createdOn);
-
-  const handleToggle = (value) => {
-    setFilterIsToggled(value);
-    dispatch(resetCurrentIndex());
-  };
+  const createdOn = fullDate(currentImage?.createdOn);
 
   const handleClick = (type) => {
     if (type === "next") {
@@ -41,33 +38,35 @@ export default function ImageCarousel() {
     }
   };
 
-  // TODO: refactor this, dont want to fetch each time the filter is toggled
-  useEffect(() => {
-    if (filterIsToggled) {
-      const filteredImages = images.filter((image) => {
-        return image.detectionsList.length > 0;
-      });
-      dispatch(setImages(filteredImages));
-    } else {
-      fetchEvents(
-        (images) => {
-          dispatch(setImages(images.scanResults));
-        },
-        (error) => {
-          dispatch(setError(error));
-        }
-      );
-    }
-  }, [filterIsToggled]);
-
   return (
-    <section className="flex flex-row justify-center items-center content-center h-full bg-card ">
+    <section className="flex flex-row h-full w-full">
       {imagesError && <div> {imagesError} </div>}
       {!imagesError && (
-        <section className="flex flex-col gap-y-4 justify-center align-middle ">
-          <section className="text-center text-xl mb-4">{createdOn}</section>
+        <section className="flex flex-col gap-y-2 justify-center align-middle w-screen">
+          <section className="flex mb-0 bg-background border-2 border-border p-4 justify-between">
+            <span className="flex flex-row">
+              <Clock2 size={22} className="mr-2 " />{" "}
+              <p className="text-white/80">{createdOn}</p>
+            </span>
+            <section className="flex gap-2">
+              <Badge variant="secondary">
+                {images[currentImageIndex]?.detectionsList.length}
+                <span className="ml-1">
+                  {images[currentImageIndex]?.detectionsList.length !== 1
+                    ? "DETECTIONS"
+                    : "DETECTION"}
+                </span>
+              </Badge>
+              {images[currentImageIndex]?.alert === true && (
+                <Badge variant="destructive">
+                  <CircleAlert size={12} className="mr-2" />
+                  ALERT
+                </Badge>
+              )}
+            </section>
+          </section>
 
-          <section className="flex flex-row justify-between align-middle">
+          <section className="flex flex-row justify-between items-center bg-background py-4 px-4">
             <CarouselButton
               type="previous"
               className={"rounded-full"}
@@ -92,9 +91,12 @@ export default function ImageCarousel() {
                 />
               </svg>
             </CarouselButton>
-            <p className="">
-              <b>{currentImageIndex + 1}</b>/{images.length}
-            </p>
+            <section className="flex flex-col justify-center items-center gap-y-3">
+              <p className="mb-4">
+                <b>{currentImageIndex + 1}</b>/{images.length}
+              </p>
+              {images.length > 0 && <ImageScan detectionImage={currentImage} />}
+            </section>
             <CarouselButton
               type="next"
               onClick={handleClick}
@@ -120,21 +122,11 @@ export default function ImageCarousel() {
               </svg>
             </CarouselButton>
           </section>
-
-          <section>
-            <ToggleButton value={filterIsToggled} onToggle={handleToggle}>
-              Only show images with detected gas
-            </ToggleButton>
-          </section>
-
-          <section className="flex lg:flex-row flex-col gap-x-8 align-top">
-            {images.length > 0 && <ImageScan detectionImage={currentImage} />}
-            <ScanMetadata scan={currentImage} />
-          </section>
-
-          {/* <section>
-            <ScanMetadata scan={currentImage} />
-          </section> */}
+          {images.length > 0 && (
+            <section className="flex flex-col sm:flex-row gap-x-8 justify-center items-center">
+              <ScanMetadata scan={currentImage} />
+            </section>
+          )}
         </section>
       )}
     </section>

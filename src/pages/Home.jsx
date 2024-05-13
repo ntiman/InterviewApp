@@ -2,13 +2,15 @@ import { useEffect } from "react";
 import ImageCarousel from "../components/ImageCarousel";
 import { fetchEvents, fetchCamera } from "../api/camera";
 import { useDispatch } from "react-redux";
-import { setImages, setError } from "../store/slices/eventsSlice";
+import { setImages, setError, setEvents } from "../store/slices/eventsSlice";
 import {
   setCameras,
   setCamerasLoadingError,
 } from "../store/slices/camerasSlice";
 import SelectCamera from "../components/SelectCamera";
 import { fetchOrgs } from "../api/org";
+import RecentEventsList from "../components/RecentEventsList";
+import Detections from "../components/Detections";
 
 export default function Home() {
   const dispatch = useDispatch();
@@ -25,6 +27,7 @@ export default function Home() {
 
     fetchEvents(
       (images) => {
+        dispatch(setEvents(images.events));
         dispatch(setImages(images.scanResults));
       },
       (error) => {
@@ -34,9 +37,15 @@ export default function Home() {
   }, [dispatch]);
 
   return (
-    <section className="flex bg-red w-full justify-center align-middle h-full">
-      <ImageCarousel />
-      <SelectCamera />
+    <section className="flex bg-red w-full h-full">
+      <section className="flex flex-col gap-8 w-full">
+        <section className="">
+          <RecentEventsList />
+        </section>
+        <section className="">
+          <Detections />
+        </section>
+      </section>
     </section>
   );
 }

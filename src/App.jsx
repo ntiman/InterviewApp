@@ -7,9 +7,9 @@ import NavigationBar from "./components/NavigationBar";
 function App() {
   return (
     <Router>
-      <section className="flex flex-col mx-auto bg-background text-white overflow-y-scroll min-h-screen">
+      <section className="bg-background text-white">
         <NavigationBar />
-        <section className="px-4 pt-8 bg-card">
+        <section className="pt-8 h-screen flex flex-col sm:gap-4 sm:py-4 px-9">
           <Routes>
             <Route index path="/" element={<Home />} />
             <Route path="/accounts" element={<Accounts />} />
