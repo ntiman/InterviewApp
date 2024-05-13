@@ -12,6 +12,7 @@ import {
   resetCurrentIndex,
 } from "../store/slices/eventsSlice";
 import ToggleButton from "./ToggleSwitch";
+import dateFormatter from "../lib/dateFormatter";
 
 export default function ImageCarousel() {
   const dispatch = useDispatch();
@@ -25,17 +26,7 @@ export default function ImageCarousel() {
   );
 
   const currentImage = images[currentImageIndex];
-  const createdOn = new Date(currentImage?.createdOn).toLocaleDateString(
-    "en-US",
-    {
-      year: "numeric",
-      month: "long",
-      day: "numeric",
-      hour: "numeric",
-      minute: "numeric",
-      hour12: true,
-    }
-  );
+  const createdOn = dateFormatter(currentImage?.createdOn);
 
   const handleToggle = (value) => {
     setFilterIsToggled(value);
@@ -70,7 +61,7 @@ export default function ImageCarousel() {
   }, [filterIsToggled]);
 
   return (
-    <section className="flex flex-row justify-center items-center content-center h-full">
+    <section className="flex flex-row justify-center items-center content-center h-full bg-card ">
       {imagesError && <div> {imagesError} </div>}
       {!imagesError && (
         <section className="flex flex-col gap-y-4 justify-center align-middle ">
