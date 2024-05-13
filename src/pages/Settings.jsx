@@ -1,10 +1,11 @@
-import React from 'react'
-import H1  from '../components/H1'
+import React from "react";
 
 export default function Settings() {
   return (
     <section>
-      <H1>Settigns</H1>
+      <h1 className="scroll-m-20 text-4xl font-extrabold tracking-tight lg:text-5xl">
+        Settings
+      </h1>
     </section>
-  )
+  );
 }
