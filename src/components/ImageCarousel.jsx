@@ -9,7 +9,7 @@ import {
   setError,
   nextImage,
   previousImage,
-  resetCurrentIndex
+  resetCurrentIndex,
 } from "../store/slices/eventsSlice";
 import ToggleButton from "./ToggleSwitch";
 
@@ -18,10 +18,10 @@ export default function ImageCarousel() {
 
   const [filterIsToggled, setFilterIsToggled] = useState(false);
 
-  const images = useSelector((state) => state.scansReducer.images);
-  const imagesError = useSelector((state) => state.scansReducer.error);
+  const images = useSelector((state) => state.eventsReducer.images);
+  const imagesError = useSelector((state) => state.eventsReducer.error);
   const currentImageIndex = useSelector(
-    (state) => state.scansReducer.currentImageIndex
+    (state) => state.eventsReducer.currentImageIndex
   );
 
   const currentImage = images[currentImageIndex];
@@ -102,13 +102,13 @@ export default function ImageCarousel() {
               </svg>
             </CarouselButton>
             <p className="">
-              <b>{currentImageIndex + 1}</b>/{images.length }
+              <b>{currentImageIndex + 1}</b>/{images.length}
             </p>
             <CarouselButton
               type="next"
               onClick={handleClick}
               className={"rounded-full"}
-              isEnabled={currentImageIndex +1 <= images.length}
+              isEnabled={currentImageIndex + 1 <= images.length}
             >
               <svg
                 className="w-6 h-6 text-white"
@@ -120,10 +120,10 @@ export default function ImageCarousel() {
                 viewBox="0 0 24 24"
               >
                 <path
-                   stroke="currentColor"
-                   strokeLinecap="round"
-                   strokeLinejoin="round"
-                   strokeWidth="2"
+                  stroke="currentColor"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
                   d="m9 5 7 7-7 7"
                 />
               </svg>
