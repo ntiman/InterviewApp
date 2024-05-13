@@ -60,7 +60,7 @@ export default function ImageCarousel() {
     } else {
       fetchEvents(
         (images) => {
-          dispatch(setImages(images));
+          dispatch(setImages(images.scanResults));
         },
         (error) => {
           dispatch(setError(error));
